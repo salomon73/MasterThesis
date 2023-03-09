@@ -1,0 +1,291 @@
+% Document class 
+%=============
+\documentclass[aps,prc,floatfix,showkeys,nofootinbib]{revtex4-1}
+% Packages 
+%========
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage[referable]{threeparttablex}
+\usepackage{longtable}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{color}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{arrows.meta}
+\usepgfplotslibrary{colormaps}
+\usepackage{hhline}
+\usepackage{multirow}
+\usepackage{braket}
+\usepackage{bm}
+\usepackage{esint}
+\pgfplotsset{
+    compat=newest,
+    colormap={mycolormap}{color=(lightgray) color=(white) color=(lightgray)}
+}
+\def\bibsection{\section*{\refname}} 
+% New commands
+%=============
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\eeq}{\end{equation}}
+\newcommand{\bes}{\begin{split}}
+\newcommand{\ees}{\end{split}}
+\newcommand{\BB}{\textbf{B}}
+\newcommand{\jj}{\textbf{j}}
+\newcommand{\nn}{\textbf{n}}
+\newcommand{\rr}{\textbf{r}}
+\newcommand{\vv}{\textbf{v}}
+\newcommand{\g}{\textbf{g}}
+\newcommand{\x}{\times}
+\newcommand{\ii}{\iota}
+\newcommand{\iotaa}{\bar{\iota}}
+\newcommand{\dd}{\partial}
+\newcommand{\Div}{\nabla\cdot}
+\newcommand{\grad}{\nabla}
+\newcommand{\rot}{\nabla \times}
+\newcommand{\modB}{\|B\|}
+\newcommand{\doubleint}{\int_{0}^{2\pi/N_{fp}}\int_{0}^{2 \pi} d\theta d\phi}
+\newcommand{\IInt}{\int \int d \theta d\phi}
+\newcommand{\FourierModB}{\sum_{m,n} B_{mn} \cos(m\theta - n  N_{fp}\phi)}
+\newcommand{\inscale}{0.495}
+\newcommand{\outscale}{0.8}
+\newcommand{\myscale}{0.38}
+\newcommand{\myscalea}{0.32}
+\renewcommand*{\thefootnote}{\alph{footnote}}
+% Paths
+%=====
+\graphicspath{{./IllustrationsTheory/}{./IllustrationsResults/}}  
+
+
+% Document's body
+%==============
+%-----------------DOCUMENT------------------------------
+%----------------------------------------------------------------
+\begin{document}
+\title{Shape derivative of the energy functional with respect to a change in the surface parametrization}
+
+\author{S.~Guinchard} 
+\email{salomon.guinchard@epfl.ch}
+\affiliation{Princeton Plasma Physics Laboratory, Princeton NJ, USA}
+
+
+\date{\today}
+
+{
+\let\clearpage\relax
+\maketitle
+\sloppy
+}
+
+Consider the magnetic energy functional 
+
+\beq
+E := \frac{1}{2}\int_V B^2dV,\label{energy_functional}
+\eeq\\
+
+\noindent where $V$ is the three-dimensional volume bounded by $S = \partial V$, and where $B$ can be expressed in term of the magnetic scalar potential $\mathbf{B}\equiv G\grad (\omega + \phi)$. $G$ is a surface dependance constant which depends on the surface parametrization. Both $\omega$ and the toroidal angle $\phi$ have to verify, as a consequence of $\grad \cdot \mathbf{B}$, the Laplace equation $\Delta \omega = \Delta \phi = 0$ inside $V$. Moreover we require $\mathbf{B}\cdot \mathbf{n} = 0$ on $S$. Since $E$ depends on $B^2$ integrated inside $V$, $E$ is a functional of the surface $S$ and hence depends on its parametrization. Let us parametrize $S$ as follows:
+
+\beq
+S := \Big\{ \bm{\sigma}(s,t) \in \mathbb{R}^3 : (s,t) \in \Omega\Big\},
+\eeq\\
+
+\noindent where $\Omega \subset \mathbb{R}^2$ is a bounded connected domain. We can then write the energy functional as follows: 
+
+\beq
+E = \frac{1}{2}\int_VG^2\grad(\omega + \phi)\cdot\grad(\omega + \phi). 
+\eeq\\
+
+\noindent We're interested in how the energy functional changes with a variation in the surface parametrization $\delta \bm{\sigma}$ so we want to express $\delta E [\delta \bm{\sigma}]$. According to the transport theorem for a volume functional such that the volume itself depends on the varied parameter, the shape derivative of energy can be written as 
+
+\beq
+\begin{split}
+\delta E [\delta \bm{\sigma}] &= \frac{1}{2}\int_V \delta \Big(G\grad (\omega + \phi)\Big)^2dV + \frac{1}{2}\int_{S=\partial V}(\delta \bm{\sigma}\cdot \bm{n}) \Big(G\grad (\omega + \phi)\Big)^2 dS\\
+&= \frac{1}{2}\int_V\Bigg[\delta \Big(G\grad (\omega + \phi)\Big)^2 + \Div \Big(\{G\grad (\omega + \phi)\}^2 \delta \bm{\sigma}\Big)\Bigg]dV\\
+&= \frac{1}{2}\int_V\Bigg[  2 \delta\Big(G\grad (\omega + \phi)\Big) \cdot \Big(G\grad (\omega + \phi)\Big) + \Div \Big(\{G\grad (\omega + \phi)\}^2 \delta \bm{\sigma}\Big)\Bigg]dV\\
+&= \frac{1}{2}\int_V \Bigg[ 2 \Big\{\delta G [ \delta \bm{\sigma}]\nabla(\omega + \phi) + G\nabla\delta \omega [\delta \bm{\sigma}]\Big\}\cdot G \nabla(\omega + \phi) + \Div \Big(\{G\grad (\omega + \phi)\}^2 \delta \bm{\sigma}\Big)\Bigg] dV,
+\end{split}\label{deltaE}
+\eeq\\
+
+\noindent where from the first to the second line, we used the scalar property of $\{G\grad (\omega + \phi)\}^2$ to integrate over the volume. We might want to see if the above expression for $\delta E [\delta \bm{\sigma}]$ can be further reduced. Let us try to introduce the coordinates system $\{x^{i}\}_{i=1,2,3}$, and develop the above expression in tensor notation.\\
+ 
+
+\newpage
+Let us focus first on the term coming from the surface integral, that $\Div \Big(\{G\grad (\omega + \phi)\}\Big)^2 $. Using that 
+
+\beq
+\begin{split}
+\{G\grad (\omega + \phi)\}^2 &= G^2 \nabla( \omega + \phi) \cdot \nabla(\omega+\phi)\\
+&= G^2 \frac{\partial}{\partial x^{i}}(\omega + \phi)g^{ij}\frac{\partial}{\partial x^{j}}(\omega + \phi),
+\end{split}
+\eeq\\
+
+\noindent we can express the divergence in this coordinates system
+
+\beq
+\begin{split}
+\Div \Big(\{G\grad (\omega + \phi)\}^2 \delta \bm{\sigma}\Big) =& \nabla_{\mathbf{x}}\cdot \Big[G^2 \frac{\partial}{\partial x^{i}}(\omega + \phi)g^{ij}\frac{\partial}{\partial x^{j}}(\omega + \phi)  \delta \bm{\sigma}\Big] \\
+=&\frac{\partial}{\partial x^{l}}\Big[G^2 \frac{\partial}{\partial x^{i}}(\omega + \phi)g^{ij}\frac{\partial}{\partial x^{j}}(\omega + \phi) \delta \sigma^{l}\Big]\\
+=& 2 \Big( \frac{\partial G}{\partial x^{l}}\Big)G\frac{\partial}{\partial x^{i}}(\omega + \phi)g^{ij}\frac{\partial}{\partial x^{j}}(\omega + \phi) \delta \sigma^{l}\\
+&+ G^2\Big[ \frac{\partial^2}{\partial x^{l}\partial x^{i}}(\omega + \phi) \frac{\partial}{\partial x^{j}}(\omega + \phi) + \frac{\partial^2}{\partial x^{l}\partial x^{j}}(\omega + \phi) \frac{\partial}{\partial x^{i}}(\omega + \phi) \Big]g^{ij}\delta \sigma^{l}\\
+=& 2\Bigg[ \Big( \frac{\partial G}{\partial x^{l}}\Big)G\frac{\partial}{\partial x^{i}}(\omega + \phi)\frac{\partial}{\partial x^{j}}(\omega + \phi) + G^2\frac{\partial^2}{\partial x^{l}\partial x^{i}}(\omega + \phi) \frac{\partial}{\partial x^{j}}(\omega + \phi)\Bigg]g^{ij}\delta \sigma^{l}\\
+\end{split}
+\eeq\\
+
+\noindent where we assumed for the last line that the metric tensor $g^{ij}$ is symmetric, as it can be the case on a stellarator field period. The first term in the integral from Eq.(\ref{deltaE}) can also be expressed in terms of coordinates. From the previous part, we already have the term $2 G\delta G[\delta \bm{\sigma}] \nabla(\omega + \phi) \cdot \nabla(\omega + \phi)$: 
+
+\beq
+\begin{split}
+2G\delta G[\delta \bm{\sigma}] \nabla(\omega + \phi) \cdot \nabla(\omega + \phi) =  2G \delta G[\delta \bm{\sigma}]\frac{\partial}{\partial x^{i}}(\omega + \phi)g^{ij}\frac{\partial}{\partial x^{j}}(\omega + \phi),
+\end{split}
+\eeq\\
+
+\noindent and the same way, we derive the term 
+
+\beq
+\begin{split}
+2G^2\nabla \delta \omega[\delta \bm{\sigma}] = 2 G^2 \frac{\partial }{\partial x^{i}}\delta \omega[\delta \bm{\sigma}]g^{ij}\frac{\partial}{\partial x^{j}}(\omega + \phi).
+\end{split}
+\eeq\\
+
+\noindent So if we combine all the previous terms, we get for the shape derivative of the energy functional\\
+
+\beq
+\begin{split}
+\delta E [\delta \bm{\sigma}] =& \frac{1}{2}\int_V \Bigg[ 2 \Big\{\delta G [ \delta \bm{\sigma}]\nabla(\omega + \phi) + G\nabla\delta \omega [\delta \bm{\sigma}]\Big\}\cdot G \nabla(\omega + \phi) + \Div \Big(\{G\grad (\omega + \phi)\}^2 \delta \bm{\sigma}\Big)\Bigg] dV\\
+=& \int_Vdx^{1}dx^{2}dx^{3} g^{ij}\Bigg\{ G^2 \frac{\partial }{\partial x^{i}}\delta \omega[\delta \bm{\sigma}]\frac{\partial}{\partial x^{j}}(\omega + \phi) + G \delta G[\delta \bm{\sigma}]\frac{\partial}{\partial x^{i}}(\omega + \phi)\frac{\partial}{\partial x^{j}}(\omega + \phi) \\ 
+&+ \Bigg[ \Big( \frac{\partial G}{\partial x^{l}}\Big)G\frac{\partial}{\partial x^{i}}(\omega + \phi)\frac{\partial}{\partial x^{j}}(\omega + \phi) + G^{2}\frac{\partial^2}{\partial x^{l}\partial x^{i}}(\omega + \phi) \frac{\partial}{\partial x^{j}}(\omega + \phi)\Bigg]\delta \sigma^{l} \Bigg\}
+\end{split}\label{shape_der}
+\eeq\\
+
+\noindent \textbf{Remark:} Note that in the case where the coordinate system $\{ x^{i}\}$ is orthogonal, $g^{ij} = 0$ for $i\neq j$ and Eq.(\ref{shape_der}) reduces to:\\
+
+\newpage
+
+
+\beq
+\begin{split}
+\delta E [\delta \bm{\sigma}] =& \frac{1}{2}\int_V \Bigg[ 2 \Big\{\delta G [ \delta \bm{\sigma}]\nabla(\omega + \phi) + G\nabla\delta \omega [\delta \bm{\sigma}]\Big\}\cdot G \nabla(\omega + \phi) + \Div \Big(\{G\grad (\omega + \phi)\}^2 \delta \bm{\sigma}\Big)\Bigg] dV\\
+=& \int_Vdx^{1}dx^{2}dx^{3} g^{ii}\Bigg\{ G^2 \frac{\partial }{\partial x^{i}}\delta \omega[\delta \bm{\sigma}]\frac{\partial}{\partial x^{i}}(\omega + \phi) + G \delta G[\delta \bm{\sigma}] \Big( \frac{\partial}{\partial x^{i}}(\omega + \phi)\Big)^2 \\ 
+&+ \Bigg[ \Big( \frac{\partial G}{\partial x^{l}}\Big)G\Big(\frac{\partial}{\partial x^{i}}(\omega + \phi)\Big)^2 + \frac{\partial^2}{\partial x^{l}\partial x^{i}}(\omega + \phi) \frac{\partial}{\partial x^{i}}(\omega + \phi)\Bigg]\delta \sigma^{l} \Bigg\}
+\end{split}
+\eeq\\
+
+\noindent Now, remains to express $\delta G[\delta \bm{\sigma}]$, and try to transform Eq.(\ref{shape_der}) in a surface integral. For that, we might want to try and write the term 
+
+\beq
+2 \Big\{\delta G [ \delta \bm{\sigma}]\nabla(\omega + \phi) + G\nabla\delta \omega [\delta \bm{\sigma}]\Big\}\cdot G \nabla(\omega + \phi)
+\eeq\\
+
+\noindent in the form of a divergence term as $\Div (f\mathbf{u})$  $(\lor ,  +)$ $\Div \mathbf{A} \mathbf{v}$ where $\mathbf{u}, \mathbf{v}$ are two vectors, $\mathbf{A}$ some operator matrix and $f$ a real valued function. Alternatively, we can start from the scalar potential $\varPhi$. \\
+
+\beq
+\begin{split}
+\delta(\mathbf{B}\cdot \mathbf{B}) =& 2 \delta \mathbf{B}\cdot \mathbf{B}\\
+=&2 \grad \delta \varPhi \cdot \grad \varPhi 
+\end{split}\label{scalar_pot}
+\eeq
+
+\noindent We can thus use Eq.(\ref{scalar_pot}) to rewrite the shape derivative of E. Starting again from Eq.(\ref{energy_functional}):
+
+\beq
+\begin{split}
+\delta \int_V \mathbf{B}\cdot \mathbf{B} dV =& \int_V\delta(\BB \cdot \BB)dV + \int_S (\BB\cdot \BB) \delta \bm{\sigma}\cdot \mathbf{n} dS\\
+=&  \int_V2\delta\BB \cdot \BB dV + \int_S (\BB\cdot \BB) \delta \bm{\sigma}\cdot \mathbf{n} dS\\
+=&  \int_V2\delta\grad \varPhi\cdot \grad \varPhi dV + \int_S (\grad\varPhi\cdot \grad \varPhi) \delta \bm{\sigma}\cdot \mathbf{n} dS\\
+=&  \int_V \Delta(\varPhi  \delta\varPhi) - \delta \varPhi \Delta \varPhi - \varPhi \Delta \delta \varPhi dV + \int_S (\grad\varPhi\cdot \grad \varPhi) \delta \bm{\sigma}\cdot \mathbf{n} dS,\\
+\end{split}
+\eeq\\
+
+\noindent we use now that $\Div \BB = 0 $ implies that the scalar potential has to satisfy $\Delta \varPhi =0 $ in $V$ and hence, so does its variation $\delta \varPhi [\delta \bm{\sigma}]$. Thus, we are left with the term 
+
+\beq
+\begin{split}
+\delta \int_V \mathbf{B}\cdot \mathbf{B} dV =& \int_V \Delta(\varPhi  \delta\varPhi)dV + \int_S (\grad\varPhi\cdot \grad \varPhi) \delta \bm{\sigma}\cdot \mathbf{n} dS,
+\end{split}
+\eeq\\
+
+\noindent enabling to write the shape derivative as follows\\
+
+\beq
+\begin{split}
+\delta E[\delta \bm{\sigma}] &= \frac{1}{2}\int_V\delta(\BB \cdot \BB)dV + \frac{1}{2}\int_S (\BB\cdot \BB) \delta \bm{\sigma}\cdot \mathbf{n} dS\\
+& =\frac{1}{2} \int_V \Delta(\varPhi  \delta\varPhi)dV + \frac{1}{2}\int_S (\grad\varPhi\cdot \grad \varPhi) \delta \bm{\sigma}\cdot \mathbf{n} dS\\
+&= \frac{1}{2}\int_V \Div \grad(\varPhi  \delta\varPhi)dV + \frac{1}{2}\int_S (\grad\varPhi\cdot \grad \varPhi) \delta \bm{\sigma}\cdot \mathbf{n} dS\\
+&= \frac{1}{2}\int_S \Bigg[\grad(\varPhi  \delta\varPhi) + (\grad\varPhi\cdot \grad \varPhi) \delta \bm{\sigma} \Bigg]\cdot \mathbf{n}dS.
+\end{split}\label{var_E_surf}
+\eeq\\
+
+\noindent We can now express the scalar potential in terms of $\omega$ and $\phi$ as we did previously:\\ 
+
+\beq
+\begin{split}
+\varPhi = G(\omega + \phi) \implies \delta \varPhi = \delta G(\omega + \phi ) + G \delta \omega,
+\end{split}
+\eeq\\
+
+\noindent and hence the first term in the integrand of Eq.(\ref{var_E_surf}) reads\\
+
+\beq
+\begin{split}
+\grad(\varPhi\delta\varPhi) &= \grad\Big(G(\omega + \phi)\Big\{ \delta G(\omega + \phi) + G \delta \omega \Big\} \Big)\\
+&= \grad \Big( G^2(\omega + \phi)\delta \omega + (\omega + \phi)^2 G \delta G\Big)\\
+&= G^2 \grad(\omega+\phi) \delta \omega + G^2(\omega + \phi)\grad \delta \omega + 2(\omega + \phi)\grad (\omega + \phi)G \delta G.
+\end{split}
+\eeq\\
+
+\noindent This way, we can rewrite Eq.(\ref{deltaE}) in the form of a surface integral: 
+
+\beq
+\begin{split}
+\delta E[\delta \bm{\sigma}] = \frac{1}{2}\int_S \Bigg[G^2 \grad(\omega+\phi) \delta \omega + G^2(\omega + \phi)\grad \delta \omega + 2(\omega + \phi)\grad (\omega + \phi)G \delta G + \{G\grad (\omega + \phi)\}^2 \delta \bm{\sigma}\Bigg]\cdot \mathbf{n}dS
+\end{split}\label{dEdS}
+\eeq\\
+
+\noindent As a verification, let us take integrate the divergence of the all terms but the last in the integrand of Eq.(\ref{dEdS}):\\
+
+\beq
+\begin{split}
+\int_V&\Div \Big( G^2 \grad(\omega+\phi) \delta \omega + G^2(\omega + \phi)\grad \delta \omega + 2(\omega + \phi)\grad (\omega + \phi)G \delta G\Big) dV\\
+=&\int_V \Bigg[ G^2\grad(\omega+\phi) \cdot \grad\delta \omega + G^2\Delta(\omega+\phi) \delta \omega\\
+ &+ G^2\grad(\omega + \phi)\cdot \grad \delta \omega +G^2\grad(\omega + \phi) \Delta \delta \omega\\
+ &+ \Big(\grad(\omega + \phi)\cdot\grad (\omega + \phi) +(\omega + \phi)\Delta (\omega + \phi) \Big) 2G \delta G\Bigg]dV\\
+ =&\int_V \Bigg[ 2G^2 \grad(\omega + \phi) \cdot \delta \grad(\omega+\phi) + \big( \grad(\omega + \phi) \cdot \grad(\omega + \phi)\big)\delta(G^2)\Bigg] dV\\
+ =& \int_V \delta \Big( G \grad(\omega+\phi)\cdot G \grad(\omega + \phi) \Big) dV\\
+ =& \int_V \delta \Big(\BB \cdot \BB \Big)dV,
+\end{split}
+\eeq\\
+
+\noindent where from the second to the third line we used that $\Delta \delta \omega = \Delta \omega = \Delta \phi = 0$ in $V$ and $\delta \grad(\omega + \phi) = \grad \delta \omega$. To sum things up, we have that the shape derivative of E with respect to a change in the boundary can be expressed as a volume integral as well as a surface one and we get the following identity:\\
+
+\beq
+\begin{split}
+\delta E [\delta \bm{\sigma}] =& \frac{1}{2}\int_V \Bigg[ 2 \Big\{\delta G\nabla(\omega + \phi) + G\nabla\delta \omega \Big\}\cdot G \nabla(\omega + \phi) + \Div \Big(\{G\grad (\omega + \phi)\}^2 \delta \bm{\sigma}\Big)\Bigg] dV\\
+=& \frac{1}{2}\int_S \Bigg[G^2 \grad(\omega+\phi) \delta \omega + G^2(\omega + \phi)\grad \delta \omega + 2(\omega + \phi)\grad (\omega + \phi)G \delta G + \{G\grad (\omega + \phi)\}^2 \delta \bm{\sigma}\Bigg]\cdot \mathbf{n}dS.
+\end{split}\label{dE_Final}
+\eeq\\
+
+As we did for the volume integral case, we can introduce a coordinate system on $\Omega$ to compute explicitly the surface integral of Eq.(\ref{dE_Final}). Now we want to address the subject of the variation of $G$ and $\omega$ and the way they can be related. For that, we start from the expression of $\BB$ in terms of the magnetic scalar potential:\\
+
+\beq
+\BB = G \grad(\omega + \phi). 
+\eeq\\
+
+\noindent Thus, making use of Ampere's law, we can relate $G$ and $\omega$ as follows:\\
+
+\beq
+\oiint_{\Sigma} \rot \BB \cdot \mathbf{n} dS = \oiint_{\Sigma} \mu_0 \mathbf{j} \cdot \mathbf{n} dS =\oint_{\partial \Sigma} \BB \cdot \mathbf{dl} = G\oint_{\partial \Sigma}\grad(\omega + \phi)\cdot \mathbf{dl}
+\eeq\\
+
+\noindent so we can write $G$ the following way:\\
+
+\beq
+G = \Bigg( \oiint_{\Sigma} \mu_0 \mathbf{j} \cdot \mathbf{n} dS \Bigg)  \Bigg( \oint_{\partial \Sigma}\grad(\omega + \phi)\cdot \mathbf{dl} \Bigg)^{-1}
+\eeq\\
+
+\noindent where $\Sigma$ is a closed surface with boundary  $\partial \Sigma$ containing the hole of the torus.
+\end{document}
